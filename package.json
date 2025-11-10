@@ -1,0 +1,31 @@
+{
+  "name": "tpintegradorbackend-progra3",
+  "version": "1.0.0",
+  "description": "backend",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/morenacastillo/tpIntegradorBackend-Progra3.git"
+  },
+
+  
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/morenacastillo/tpIntegradorBackend-Progra3/issues"
+  },
+  "homepage": "https://github.com/morenacastillo/tpIntegradorBackend-Progra3#readme",
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "mysql2": "^3.15.3",
+    "nodemon": "^3.1.10"
+  }
+}
