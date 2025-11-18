@@ -1,20 +1,21 @@
 import express from "express";
-const app = express();
-
 import environments from "./src/api/config/environments.js";
+import connection from "./src/api/database/db.js";
+import cors from "cors";
+
+
+const app = express();
 const PORT = environments.port;
 
-import connection from "./src/api/database/db.js";
+app.use(cors());
 
 app.listen(PORT, () => {
     console.log(`Servidor corriendo en el puerto ${PORT}`);
 });
 
-
 app.get("/", (req, res) => {
     res.send("Hola mundo desde Express.js");
 });
-
 
 
 app.get("/products", async (req, res) => {
