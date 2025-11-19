@@ -17,21 +17,41 @@ app.get("/", (req, res) => {
     res.send("Hola mundo desde Express.js");
 });
 
-
 app.get("/products", async (req, res) => {
     try {
         const sql = "SELECT * FROM productos";
-        const [rows] = await connection.query(sql);
+        const [rows] = await connection.query(sql); //guardamos las filas de las consultas sql
 
-        res.status(200).json({
+        res.status(200).json({ //estado 200 ok
             payload: rows
         });
     
-    } catch (error) {
-        console.error("Error obteniendo productos", error.message);
+    } catch (error) { //estado 500 error
+        console.error("Error SSSSobteniendo productos", error.message);
         res.status(500).json({
             message: "Error interno al obtener productos"
         });
     }
-
 });
+
+
+app.get("/products/:id", async (req, res) => {
+    try {
+        let { id } = req.params;
+        let sql = "SELECT * FROM productos WHERE productos.id = ?";
+
+        let [rows] = await connection.query(sql, [id]);
+        console.log(rows);
+
+        res.status(200).json({ //estado 200 ok
+            payload: rows
+        });
+        
+    } catch (error) {
+        console.error(`Error obteniendo productos con id ${id}`, error.message);
+
+        res.status(500).json({
+            message: "Error interno al obtener producto in id"
+        })
+    }
+})
