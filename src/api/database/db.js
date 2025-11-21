@@ -10,5 +10,6 @@ const connection = mysql2.createPool({ //createpool deja un conjunto de conexion
     user: database.user,
     password: database.password
 });
-///exportat conexion abierta
+
+//exportar conexion abierta
 export default connection;
