@@ -8,11 +8,16 @@ const app = express();
 const PORT = environments.port;
 
 app.use(cors());
-
 app.use(express.json());
+
+app.use((req, res, next) => {
+    console.log(`[${new Date().toLocaleString()}]  ${req.method}  ${req.url}`);
+    next();
+});
 
 app.get("/", (req, res) => {
     res.send("Hola mundo desde Express.js");
+    
 });
 
 // Mostrar productos =========================================
@@ -29,7 +34,8 @@ app.get("/products", async (req, res) => {
     } catch (error) { //estado 500 error
         console.error("Error obteniendo productos", error.message);
         res.status(500).json({
-            message: "Error interno al obtener productos"
+            message: "Error interno al obtener productos",
+            message: rows.length === 0 ? "No se encontraron productos" : "Productos encontrados"
         });
     }
 });
@@ -37,10 +43,26 @@ app.get("/products", async (req, res) => {
 app.get("/products/:id", async (req, res) => {
     try {
         let { id } = req.params;
+
+        if(!id || isNaN(Number(id))) {
+            return res.status(400).json({
+                message: "El id del producto debe ser un numero valido"
+            })
+        }
+
         let sql = "SELECT * FROM productos WHERE productos.id = ?";
         
         let [rows] = await connection.query(sql, [id]);
         console.log(rows);
+
+        if(rows.length === 0) {
+            console.log("Error. No existe producto con ese id");
+            return res.status(404).json({
+                message: "No se encontro producto con id:", id
+
+            })
+            
+        }
         
         res.status(200).json({ //estado 200 bueno
             payload: rows
@@ -58,11 +80,16 @@ app.get("/products/:id", async (req, res) => {
 
 
 // Crear productos =========================================
- 
+
 app.post("/products", async (req, res) => {
     try {
         let { titulo, tipo, genero, autor, precio, imagen } = req.body;
-        console.log(req.body);
+
+        if(!titulo ||!tipo ||!genero ||!autor ||!precio ||!imagen) {
+            return res.status(400).json({
+                message: "Datos invalidos, asegurate de enviar todos los datos requeridos"
+            });
+        }
 
         let sql = `INSERT INTO productos (titulo, tipo, genero, autor, precio, imagen) VALUES (?, ?, ?, ?, ?, ?)`;
         
@@ -85,6 +112,50 @@ app.post("/products", async (req, res) => {
 });
 
 
+// Update productos =========================================
+
+app.put("/products", async (req, res) => {
+    try {
+        let { id, titulo, tipo, genero, autor, precio, imagen, activo } = req.body;
+
+        if(!id ||!titulo ||!tipo ||!genero ||!autor ||!precio ||!imagen ||!activo) {
+            return res.status(400).json({
+                message: "Faltan campso requeridos"
+            });
+        }
+
+        let sql = `
+            UPDATE productos
+            SET titulo = ?, tipo = ?, genero = ?, autor = ?, precio = ?, imagen = ?, activo = ?
+            WHERE id = ?
+            `;
+
+        let [resultado] = await connection.query(sql, [titulo, tipo, genero, autor, precio, imagen,
+            activo, id]);
+
+
+        if(resultado.affectedRows === 0) { // No se actualizo nada
+            return res.status(400).json({
+                message: "No se actualizo el producto"
+            });
+        }
+
+        res.status(201).json({
+            message: `Producto con ID ${id} actualizado correctamente`,
+        })
+        
+        
+    } catch(error) {
+        console.error("Error al actualizar productos", error);
+
+        res.status(500).json ({
+            message: "Error interno del servidor",
+            error: error.message
+        });
+    }
+});
+
+
 
 // Eliminar productos =========================================
 
@@ -97,6 +168,13 @@ app.delete("/products/:id", async (req, res) => {
         let [resultado] = await connection.query(sql, [id]);
         console.log(resultado);
         
+        if(resultado.affectedRows === 0) { 
+            return res.status(400).json({
+                message: "No se elimino el producto"
+            });
+        }
+
+
         return res.status(200).json({
             message: `Producto in id ${id} eliminado correctamente`
         });
