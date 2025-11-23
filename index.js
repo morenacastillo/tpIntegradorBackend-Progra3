@@ -2,7 +2,7 @@ import express from "express";
 import environments from "./src/api/config/environments.js";
 import connection from "./src/api/database/db.js";
 import cors from "cors";
-
+import { loggerUrl, validateId } from "./src/api/middlewares/middlewares.js";
 
 const app = express();
 const PORT = environments.port;
@@ -10,14 +10,10 @@ const PORT = environments.port;
 app.use(cors());
 app.use(express.json());
 
-app.use((req, res, next) => {
-    console.log(`[${new Date().toLocaleString()}]  ${req.method}  ${req.url}`);
-    next();
-});
+app.use(loggerUrl);
 
 app.get("/", (req, res) => {
     res.send("Hola mundo desde Express.js");
-    
 });
 
 // Mostrar productos =========================================
@@ -40,7 +36,7 @@ app.get("/products", async (req, res) => {
     }
 });
 
-app.get("/products/:id", async (req, res) => {
+app.get("/products/:id", validateId, async (req, res) => {
     try {
         let { id } = req.params;
 
@@ -155,11 +151,9 @@ app.put("/products", async (req, res) => {
     }
 });
 
-
-
 // Eliminar productos =========================================
 
-app.delete("/products/:id", async (req, res) => {
+app.delete("/products/:id", validateId, async (req, res) => {
     try {
         let { id } = req.params;
 
@@ -173,7 +167,6 @@ app.delete("/products/:id", async (req, res) => {
                 message: "No se elimino el producto"
             });
         }
-
 
         return res.status(200).json({
             message: `Producto in id ${id} eliminado correctamente`
@@ -189,7 +182,6 @@ app.delete("/products/:id", async (req, res) => {
         
     }
 })
-
 
 app.listen(PORT, () => {
     console.log(`Servidor corriendo en el puerto ${PORT}`);
