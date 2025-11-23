@@ -15,7 +15,7 @@ app.get("/", (req, res) => {
     res.send("Hola mundo desde Express.js");
 });
 
-// Mostrar productos
+// Mostrar productos =========================================
 
 app.get("/products", async (req, res) => {
     try {
@@ -55,13 +55,23 @@ app.get("/products/:id", async (req, res) => {
     }
 });
 
-// Crear productos
+
+
+// Crear productos =========================================
  
 app.post("/products", async (req, res) => {
     try {
-        const { autor, genero, imagen, precio, tipo, titulo} = req.body;
-
+        let { titulo, tipo, genero, autor, precio, imagen } = req.body;
         console.log(req.body);
+
+        let sql = `INSERT INTO productos (titulo, tipo, genero, autor, precio, imagen) VALUES (?, ?, ?, ?, ?, ?)`;
+        
+        let [resultado] = await connection.query(sql, [titulo, tipo, genero, autor, precio, imagen]);
+
+        res.status(201).json({
+            message: "producto creado con exito",
+            productId: resultado.insertId
+        })
         
 
     } catch(error) {
@@ -73,6 +83,35 @@ app.post("/products", async (req, res) => {
         });
     }
 });
+
+
+
+// Eliminar productos =========================================
+
+app.delete("/products/:id", async (req, res) => {
+    try {
+        let { id } = req.params;
+
+        let sql = "DELETE FROM productos WHERE id = ?"
+
+        let [resultado] = await connection.query(sql, [id]);
+        console.log(resultado);
+        
+        return res.status(200).json({
+            message: `Producto in id ${id} eliminado correctamente`
+        });
+        
+    } catch (error) {
+        console.log("Error al eliminar un producto: ", error);
+
+        res.status(500).json({
+            message: `Error al eliminar un producto con id ${id}: `, error,
+            error: error.message
+        })
+        
+    }
+})
+
 
 app.listen(PORT, () => {
     console.log(`Servidor corriendo en el puerto ${PORT}`);
