@@ -1,5 +1,5 @@
 const loggerUrl = (req, res, next) => {
-    console.log(`[${new Date().toLocaleString}] ${req.method} ${req.url}`);
+    console.log(`[${new Date().toLocaleString()}] ${req.method} ${req.url}`);
 
     next();
 }
@@ -7,15 +7,14 @@ const loggerUrl = (req, res, next) => {
 const validateId = (req, res, next) => {
     let { id } = req.params;
 
-    // Nos aseguramos que el id no sea un numero
-
-    if(!id || isNan(Number(id))) {
+    
+    if(!id || isNaN(Number(id))) {
         return res.status(400).json({
-            message: "El id del producto debe ser un numero"
+            message: "El id del producto debe ser un numero valido"
         })
     }
 
-    req.id = parseInt(id, 10)
+    req.id = parseInt(id, 10);
 
     console.log("Id validado: ", req.id);
     next();
@@ -24,4 +23,4 @@ const validateId = (req, res, next) => {
 export {
     loggerUrl,
     validateId
-}
+};
