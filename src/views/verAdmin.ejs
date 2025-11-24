@@ -1,0 +1,21 @@
+<%- include("partials/headAdmin.ejs") %>
+<%- include("partials/navAdmin.ejs") %>
+
+    <main>
+        
+        <h1>Lista de productos</h1>
+        <hr>
+        <div id="contenedor-productos">
+            <% productos.forEach(prod => { %>
+                <div class="card-producto">
+                    <img src="<%= prod.imagen %>" alt="<%= prod.titulo %>">
+                    <h5><%= prod.titulo %></h5>
+                    <p>Id: <%= prod.precio %></p>
+                    <p>$<%= prod.tipo %></p>
+                </div>
+             <% }) %>
+        </div>
+    
+    </main>
+
+<%- include("partials/footer.ejs") %>
