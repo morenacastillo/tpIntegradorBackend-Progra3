@@ -135,7 +135,7 @@ input[type=number] {
 }
 
 .li-listados img {  
-     width: 180px;
+    width: 180px;
     height: 200px;
     object-fit: cover;
     border-radius: 10px;

@@ -46,6 +46,45 @@ app.get("/verAdmin", async (req, res) => {
     }
 });
 
+app.get("/consultaAdmin", async(req, res) => {
+    res.render("consultaAdmin")
+});
+
+app.get("/crearAdmin", async(req, res) => {
+    res.render("crearAdmin")
+});
+
+app.get("/modificarAdmin", async(req, res) => {
+    res.render("modificarAdmin")
+});
+
+app.get("/eliminarAdmin", async(req, res) => {
+    res.render("eliminarAdmin")
+});
+
+app.get("/inicio", async(req, res) => {
+    res.render("inicio")
+});
+
+app.get("/productos", async(req, res) => {
+    try {
+        const [rows] = await connection.query("SELECT * FROM productos")
+        res.render("productos", {
+            productos: rows
+        });
+    } catch(error) {
+        console.error(error);
+        
+    }
+});
+
+app.get("/nosotros", async(req, res) => {
+    res.render("nosotros")
+});
+
+app.get("/carrito", async(req, res) => {
+    res.render("carrito")})
+
 app.listen(PORT, () => {
     console.log(`Servidor corriendo en el puerto ${PORT}`);
 });
