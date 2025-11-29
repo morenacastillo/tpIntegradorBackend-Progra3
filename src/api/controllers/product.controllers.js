@@ -1,5 +1,3 @@
-import connection from "../database/db.js";
-
 import ProductsModels from "../models/product.models.js"
 
 export const getAllProducts = async (req, res) => {
