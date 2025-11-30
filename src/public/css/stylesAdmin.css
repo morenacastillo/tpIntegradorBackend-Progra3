@@ -12,8 +12,78 @@
     box-sizing: border-box;
 }
 
-/*Consulta*/
+/*Login*/
 
+.h1-centrar {
+    text-align: center;
+}
+
+.main-login {
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 0
+    ;
+}
+
+.div-login {
+    background-color: #1a1a2e; /* o el color que uses */
+    padding: 30px;
+    border-radius: 10px;
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Inputs email y password */
+.email-pass {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.email-pass input {
+    padding: 10px;
+    border-radius: 6px;
+    border: none;
+    font-size: 16px;
+}
+
+/* Botones alineados horizontalmente */
+.login-rapido {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+/* Botones */
+.login-rapido input {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.login-rapido input[type="submit"] {
+    background: var(--colorFooter);
+    color: white;
+}
+
+#acceso-rapido {
+    background:var(--colorProducto);
+    color: white;
+}
+
+.email-pass {
+    display: grid;
+}
+
+/*Consulta*/
 
 body {
     font-family: 'Poppins', sans-serif;
@@ -149,61 +219,141 @@ input[type=number] {
 
 /*Crear*/
 
+#crear-productos {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 25px;
+    max-width: 700px;  
+    margin: 0 auto;    
+    padding: 19px;
+}
+
+.campo {
+    display: flex;
+    flex-direction: column; 
+}
+
+.campo label {
+    text-align: center; 
+    margin-bottom: 10px;
+}
+
+.campo label::after {
+    content: "";
+    display: block;
+    margin: 4px auto 10px auto;
+    width: 100%;           
+    height: 2px;
+    background: white;
+}
+
+#crear-productos input,
+#crear-productos select {
+    width: 100%;
+    border: none;width: 350px;
+    padding: 5px;
+    font-size: 14px;
+    border-radius: 5px;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-boton {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 10px;
+    grid-column: span 2; 
+    border: none;
+    background-color: var(--violetaOscuro);
+    color: var(--blanco);
+    width: auto;
+    padding: 10px;
+    font-size: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
 
 /*Modificar*/
 
+.boton-crear {  
+    margin-top: 10px;
+}
+
+#modificar-productos {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 25px;
+    max-width: 700px;  
+    margin: 0 auto;
+}
+
+#modificar-productos input[type="submit"] {
+    border: none;
+    background: var(--colorProducto);
+}
+
+#modificar-productos input,
+#modificar-productos select {
+    width: 100%;
+    border: none;
+    padding: 5px;
+    font-size: 14px;
+    border: 2px solid;
+    border-radius: 5px;
+    align-items: center;
+    justify-content: center;
+}
+
+.full-row {
+    grid-column: 1 / 3;       /* ocupa las dos columnas */
+    display: flex;
+    flex-direction: column;   /* label arriba, input abajo */
+    gap: 8px;
+}
 
 /*Eliminar*/
 
+
+
 /* Ver Productos*/
 
-#contenedor-productos {
-    display: grid;
-    grid-template-columns: repeat(3, auto);
-    justify-content: center;
-    text-align: center;
-    gap: 20px;
-    width: fit-content;
-    margin: 0 auto;
-    column-gap: 120px;
-}
-
-body h1 {
-    text-align: center;
-}
-
-.card-producto {
+.tabla-centro {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    border: 2px solid;
-    width: 290px;
-    height: auto;
-    padding: 10px;
+    justify-content: center;
+    width: 100%;
+}
+
+
+#tabla-productos {
+    width: 100%;
+    border-collapse: collapse;
+    width: 70%;
     margin-top: 20px;
-    border-radius: 10px;
-    background-color: var(--colorProducto);
-    border: 3px solid var(--violetaOscuro);
-    transition: 0.45s ease;
+    background: #151020;  
+    color: white;
+    margin-bottom: 20px;
+    width: 80%;
+    margin: 20px auto;
+    text-align: center;
+    justify-content: center;
 }
 
-.card-producto:hover {
-    transform: scale(1.05);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+#tabla-productos th, 
+#tabla-productos td {
+    border: 1px solid #333;
+    padding: 10px;
+    text-align: center;
 }
 
-.card-producto img {
-    margin-top: 5px;
-    width: 200px;
-    width: 200px;
-    object-fit: fill;
+#tabla-productos th {
+    background: #201833;
 }
 
-.card-producto h3 {
-    margin-top: 15px;
-    font-size: 20px;
-}
 
-.card-producto p {
-    margin-top: 15px;
+#tabla-productos img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 5px;
 }

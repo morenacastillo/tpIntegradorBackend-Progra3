@@ -2,36 +2,57 @@
 <%- include("partials/navAdmin.ejs") %>
 
     <main>
-        <h1>Crear producto</h1>
+        <h1 class="h1-centrar">Crear producto</h1>
         <hr>
         <br>
         
         <!-- Formulario que va a enviar nuestros datos al endpoint -->
         
         <form id="crear-productos">
-            <label for="tituloProd">Titulo</label>
-            <input type="text" name="titulo" id="tituloProd" required>
 
-            <label for="tipoProd">Tipo</label>
-            <select name="tipo" id="tipoProd">
-                <option value="Vinilo">Vinilo</option>
-                <option value="Cd">Cd</option>
-                <option value="Cassette">Cassette</option>
-            </select>
-            
-            <label for="generoProd">Genero</label>
-            <input type="text" name="genero" id="generoProd" required>
-            
-            <label for="autorProd">Autor</label>
-            <input type="text" name="autor" id="autorProd" required>
+            <div class="campo">
+                <label for="tituloProd">Título</label>
+                <div class="subrayado"></div>
+                <input type="text" id="tituloProd" required>
+            </div>
 
-            <label for="precioProd">Precio</label>
-            <input type="number" name="precio" id="precioProd" required>
-            
-            <label for="imagenProd">Imagen</label>
-            <input type="text" name="imagen" id="imagenProd" required>
+            <div class="campo">
+                <label for="tipoProd">Tipo</label>
+                <div class="subrayado"></div>
+                <select id="tipoProd">
+                    <option>Vinilo</option>
+                    <option>Cd</option>
+                    <option>Cassette</option>
+                </select>
+            </div>
 
-            <input type="submit" value="Crear producto">
+            <div class="campo">
+                <label for="generoProd">Género</label>
+                <div class="subrayado"></div>
+                <input type="text" id="generoProd" required>
+            </div>
+
+            <div class="campo">
+                <label for="autorProd">Autor</label>
+                <div class="subrayado"></div>
+                <input type="text" id="autorProd" required>
+            </div>
+
+            <div class="campo">
+                <label for="precioProd">Precio</label>
+                <div class="subrayado"></div>
+                <input type="number" id="precioProd" required>
+            </div>
+
+            <div class="campo">
+                <label for="imagenProd">Imagen</label>
+                <div class="subrayado"></div>
+                <input type="text" id="imagenProd" required>
+            </div>
+
+            
+                <button type="submit" class="form-boton">Crear</button>
+            
         </form>
 
         <div id="contenedor-productos"></div>

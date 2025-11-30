@@ -44,6 +44,7 @@ app.set("views", join(__dirname, "src/views")); // Indicamos la ruta de las vist
 */ 
 
 app.use("/", viewRoutes);
+
 app.use("/api/products", productRoutes);
 
 

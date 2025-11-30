@@ -37,7 +37,7 @@ function mostrarProducto(producto) {
                 <p>Id: ${producto.id} | Nombre: ${producto.titulo} | Precio: $${producto.precio}</p>
             </li>
             <li>
-            <input type="button" id="modificar_boton" value="Modificar producto"
+            <input class="boton boton-crear" type="button" id="modificar_boton" value="Modificar producto"
         </li>
         </ul>
         `;
@@ -57,39 +57,49 @@ function formularioPutProducto(event, producto) {
 
     let updateFormularioHTML =  `
         <form id="modificar-productos">
+            <div class="campo">    
+                <label class="labels" for="activoProd">Activo</label>
+                <select name="activo" id="activoProd" required> 
+                    <option value="0">Inactivo</option>
+                    <option value="1">Activo</option>
+                </select>
+            </div>
 
-            <label for="idProd">Id</label>
-            <input type="hidden" name="id" id="idProd" value="${producto.id}" required>
+            <div class="campo">
+                <label for="tituloProd">Titulo</label>
+                <input type="text" name="titulo" id="tituloProd" value="${producto.titulo}" required>
+            </div>
 
-            <label for="activoProd">Activo</label>
-            <select name="activo" id="activoProd" required> 
-                <option value="0">Inactivo</option>
-                <option value="1">Activo</option>
-            </select>
+            <div class="campo">
+                <label for="tipoProd">Tipo</label>
+                <select name="tipo" id="tipoProd">
+                    <option value="Vinilo">Vinilo</option>
+                    <option value="Cd">Cd</option>
+                    <option value="Cassette">Cassette</option>
+                </select>
+            </div>
+
+            <div class="campo">
+                <label for="generoProd">Genero</label>
+                <input type="text" name="genero" id="generoProd" value="${producto.genero}" required>
+            </div>
             
-            <label for="tituloProd">Titulo</label>
-            <input type="text" name="titulo" id="tituloProd" value="${producto.titulo}" required>
-
-            <label for="tipoProd">Tipo</label>
-            <select name="tipo" id="tipoProd">
-                <option value="Vinilo">Vinilo</option>
-                <option value="Cd">Cd</option>
-                <option value="Cassette">Cassette</option>
-            </select>
+            <div class="campo">
+                <label for="autorProd">Autor</label>
+                <input type="text" name="autor" id="autorProd" value="${producto.autor}" required>
+            </div>
             
-            <label for="generoProd">Genero</label>
-            <input type="text" name="genero" id="generoProd" value="${producto.genero}" required>
+            <div class="campo">
+                <label for="precioProd">Precio</label>
+                <input type="number" name="precio" id="precioProd" value="${producto.precio}" required>
+            </div>
             
-            <label for="autorProd">Autor</label>
-            <input type="text" name="autor" id="autorProd" value="${producto.autor}" required>
+            <div class="campo full-row">
+                <label for="imagenProd">Imagen</label>
+                <input type="text" name="imagen" id="imagenProd" value="${producto.imagen}" required>
+            </div>
 
-            <label for="precioProd">Precio</label>
-            <input type="number" name="precio" id="precioProd" value="${producto.precio}" required>
-            
-            <label for="imagenProd">Imagen</label>
-            <input type="text" name="imagen" id="imagenProd" value="${producto.imagen}" required>
-
-            <input type="submit" value="Modificar producto">
+            <input class="full-row form-boton" type="submit" value="Modificar producto">
         </form> 
     `
     updateFormularioContenedor.innerHTML = updateFormularioHTML;
@@ -102,7 +112,6 @@ function formularioPutProducto(event, producto) {
 
         let data = Object.fromEntries(formData.entries()); 
     
-        
         try {
             
             let respuesta = await fetch(url, {

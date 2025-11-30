@@ -3,19 +3,29 @@
 
     <main>
         
-        <h1>Lista de productos</h1>
+        <h1 class="h1-centrar">Lista de productos</h1>
         <hr>
-        <div id="contenedor-productos">
-            <% productos.forEach(prod => { %>
-                <div class="card-producto">
-                    <img src="<%= prod.imagen %>" alt="<%= prod.titulo %>">
-                    <h3><%= prod.titulo %></h3>
-                    <p><%= prod.tipo %></p>
-                    <p>$<%= prod.precio %></p>
-                </div>
-            <% }) %>
+        <div class="tabla-centro">
+            <table id="tabla-productos">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Título</th>
+                        <th>Tipo</th>
+                        <th>Género</th>
+                        <th>Precio</th>
+                        <th>Autor</th>
+                        <th>Imagen</th>
+                        <th>Activo</th>
+                    </tr>
+                </thead>
+
+                <tbody id="tabla-productos-body">
+                </tbody>
+            </table>
         </div>
-    
     </main>
+
+    <script src="js/get.js"></script>
 
 <%- include("partials/footer.ejs") %>
