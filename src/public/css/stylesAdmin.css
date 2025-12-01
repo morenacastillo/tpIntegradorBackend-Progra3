@@ -86,7 +86,7 @@
 /*Consulta*/
 
 body {
-    font-family: 'Poppins', sans-serif;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     color: var(--blanco);
     display: flex;
     flex-direction: column;
