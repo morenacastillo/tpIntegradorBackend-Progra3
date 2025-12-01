@@ -52,6 +52,7 @@ app.get("/login", async(req, res) => {
     res.render("login")
 })
 
+//MODULARIZAR ------------------------------------------------------------
 app.post("/login", async (req, res) =>{
     try {
         const { email, password } = req.body;
@@ -117,33 +118,6 @@ app.post("/logout", (req, res) =>{
     })
 })
 
-//sacar =================================================================
-
-
-app.get("/inicio", async(req, res) => {
-    res.render("inicio")
-});
-
-app.get("/productos", async(req, res) => {
-    try {
-        const [rows] = await connection.query("SELECT * FROM productos")
-        res.render("productos", {
-            productos: rows
-        });
-    } catch(error) {
-        console.error(error);
-        
-    }
-});
-
-app.get("/nosotros", async(req, res) => {
-    res.render("nosotros")
-});
-
-app.get("/carrito", async(req, res) => {
-    res.render("carrito")})
-
-//sacar =================================================================
 
 
 app.listen(PORT, () => {
