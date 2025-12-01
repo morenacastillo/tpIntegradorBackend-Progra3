@@ -12,14 +12,12 @@
 
             <div class="campo">
                 <label for="tituloProd">Título</label>
-                <div class="subrayado"></div>
-                <input type="text" id="tituloProd" required>
+                <input type="text" id="tituloProd" name="titulo" required>
             </div>
 
             <div class="campo">
                 <label for="tipoProd">Tipo</label>
-                <div class="subrayado"></div>
-                <select id="tipoProd">
+                <select id="tipoProd" name="tipo">
                     <option>Vinilo</option>
                     <option>Cd</option>
                     <option>Cassette</option>
@@ -28,37 +26,31 @@
 
             <div class="campo">
                 <label for="generoProd">Género</label>
-                <div class="subrayado"></div>
-                <input type="text" id="generoProd" required>
+                <input type="text" id="generoProd" name="genero" required>
             </div>
 
             <div class="campo">
                 <label for="autorProd">Autor</label>
-                <div class="subrayado"></div>
-                <input type="text" id="autorProd" required>
+                <input type="text" id="autorProd" name="autor" required>
             </div>
 
             <div class="campo">
                 <label for="precioProd">Precio</label>
-                <div class="subrayado"></div>
-                <input type="number" id="precioProd" required>
+                <input type="number" id="precioProd" name="precio" required>
             </div>
 
             <div class="campo">
                 <label for="imagenProd">Imagen</label>
-                <div class="subrayado"></div>
-                <input type="text" id="imagenProd" required>
+                <input type="text" id="imagenProd" name="imagen" required>
             </div>
 
-            
-                <button type="submit" class="form-boton">Crear</button>
-            
+            <button type="submit" class="form-boton">Crear</button>
         </form>
 
         <div id="contenedor-productos"></div>
 
     </main>
 
-    <script src="js/create.js"></script>
+    <script src="/js/create.js"></script>
 
 <%- include("partials/footer.ejs") %>

@@ -57,6 +57,9 @@ function formularioPutProducto(event, producto) {
 
     let updateFormularioHTML =  `
         <form id="modificar-productos">
+
+            <input type="hidden" name="id" value="${producto.id}">
+
             <div class="campo">    
                 <label class="labels" for="activoProd">Activo</label>
                 <select name="activo" id="activoProd" required> 
@@ -91,7 +94,7 @@ function formularioPutProducto(event, producto) {
             
             <div class="campo">
                 <label for="precioProd">Precio</label>
-                <input type="number" name="precio" id="precioProd" value="${producto.precio}" required>
+                <input type="number" name="precio" id="precioProd" value="${Number(producto.precio)}" required>
             </div>
             
             <div class="campo full-row">
