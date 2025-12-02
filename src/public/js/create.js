@@ -27,13 +27,11 @@ crearProductos.addEventListener("submit", async (event) => {
     } else {
         alert(`Error en la creacion de producto: ${resultado.message}`)
     }
-
     } catch(error) {
         console.error("Error al enviar los datos: ", error);
         alert("Error al procesar los datos")
     }
 });
-
 
 altaUsers_container.addEventListener("submit", async event => {
     event.preventDefault();

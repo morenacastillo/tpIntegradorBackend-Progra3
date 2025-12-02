@@ -111,8 +111,6 @@
     box-shadow: 0 5px 15px rgba(0,0,0,0.5);
 }
 
-
-
 /*Consulta*/
 
 body {
@@ -247,7 +245,6 @@ input[type=number] {
     font-weight: 500;
 }
 
-
 /*Crear*/
 
 #crear-productos, #altaUsers-container {
@@ -364,10 +361,9 @@ input[type=number] {
 
 .full-row {
     display: flex;
-    flex-direction: column;   /* label arriba, input abajo */
+    flex-direction: column;
     gap: 8px;
 }
-
 
 /* Ver Productos*/
 
@@ -376,7 +372,6 @@ input[type=number] {
     justify-content: center;
     width: 100%;
 }
-
 
 #tabla-productos {
     width: 100%;
@@ -402,7 +397,6 @@ input[type=number] {
 #tabla-productos th {
     background: #201833;
 }
-
 
 #tabla-productos img {
     width: 80px;
