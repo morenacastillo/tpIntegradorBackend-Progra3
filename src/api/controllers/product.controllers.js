@@ -36,19 +36,17 @@ export const getProductById = async (req, res) => {
             console.log("Error. No existe producto con ese id");
             return res.status(404).json({
                 message: "No se encontro producto con id:", id
-
             })
-            
         }
         
-        res.status(200).json({ //estado 200 bueno
+        res.status(200).json({
             payload: rows
         });
         
     } catch (error) {
         console.error(`Error obteniendo productos con id ${id}`, error.message);
         
-        res.status(500).json({ // estado 500 malo
+        res.status(500).json({
             message: "Error interno al obtener producto in id"
         });
     }

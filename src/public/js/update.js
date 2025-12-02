@@ -13,13 +13,18 @@ getProduct_form.addEventListener("submit", async (event) => {
     let idProd = data.idProd;
                     
     try {
-        let repuesta = await fetch(`${url}/${idProd}`);
+        let respuesta = await fetch(`${url}/${idProd}`);
         
-        let datos = await repuesta.json();
+        let datos = await respuesta.json();
+        
+        if(respuesta.ok) {
+                let producto = datos.payload[0];
+                mostrarProducto(producto);
 
-        let producto = datos.payload[0];
-        
-        mostrarProducto(producto); 
+            } else {
+                console.error(datos.message)
+                mostrarError(datos.message)
+            }
         
     
     } catch (error) {
@@ -144,3 +149,15 @@ function formularioPutProducto(event, producto) {
         }
     })
 }
+
+function mostrarError(error){
+        let htmlError = `
+        <li class="mensaje-error">
+            <p>
+                <strong>Error:</strong>
+                <span>${error}</span>
+            </p>
+        </li>
+        `  
+        listaProductos.innerHTML = htmlError;
+    }

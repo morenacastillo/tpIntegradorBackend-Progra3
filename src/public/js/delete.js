@@ -13,13 +13,27 @@ getProduct_form.addEventListener("submit", async (event) => {
     let idProd = data.idProd;
                     
     try {
-        let repuesta = await fetch(`${url}/${idProd}`);
+        let respuesta = await fetch(`${url}/${idProd}`);
         
-        let datos = await repuesta.json();
+        let datos = await respuesta.json();
+        
+        if(respuesta.ok) {
+            let producto = datos.payload[0];
+            mostrarProducto(producto)
 
-        let producto = datos.payload[0];
+        } else {
+                console.error(datos.message)
+                mostrarError(datos.message)
+            } 
+        } catch (error) {
+            console.log("Error:", error);
+            mostrarError("Error al buscar el producto");
+        }
         
-        let htmlProducto = 
+    });
+    
+function mostrarProducto(producto){
+    let htmlProducto = 
         `
         <ul class="ul-admin">
             <li class="li-listados">
@@ -27,51 +41,58 @@ getProduct_form.addEventListener("submit", async (event) => {
                 <p>Id: ${producto.id} | Nombre: ${producto.titulo} | Precio: $${producto.precio}</p>
             </li>
             <li>
-                <input class="full-row form-boton" type="submit" value="Eliminar producto"
+                <input id="eliminar-boton" type="submit" value="Eliminar producto"
             </li>
         </ul>
         `;
 
         listaProductos.innerHTML = htmlProducto;
-    
-        let eliminar_boton = document.getElementById("eliminar_boton")
+        let eliminarBoton = document.getElementById("eliminar-boton")
 
-        eliminar_boton.addEventListener("click", event => {
-            event.stopPropagation();
-            let confirmacion = confirm("¿Quieres eliminar este producto?")
-            if(!confirmacion) {
-                alert("Eliminacion cancelada");
-            } else {
-                eliminarProducto(idProd);
+        eliminarBoton.addEventListener("click", event => {
+            let confirmacion = confirm("¿Quieres eliminar este producto?");
+
+            if (!confirmacion) {
+                alert("Eliminación cancelada");
+                return;
             }
+
+            eliminarProducto(producto.id);
+    });
+}
+
+
+async function eliminarProducto(id) {
+    console.log("eliminado: ", id);
+    try {
+        let respuesta = await fetch(`${url}/${id}`, {
+            method: "DELETE"
         });
 
-        async function eliminarProducto(id) {
-            console.log("eliminado: ", id);
-            try {
-                let respuesta = await fetch(`${url}/${id}`, {
-                    method: "DELETE"
-                });
+        let resultado = await respuesta.json();
 
-                let resultado = await respuesta.json();
-
-                if(respuesta.ok){
-                    alert(resultado.message);
-
-                    listaProductos.innerHTML = "";
-                }
-            
-            } catch (error) {
-                console.error("Error en la solicitud DELETE: ", error)
-                alert("Ocurrio un error al eliminar un producto")
-            }
-            
+        if(respuesta.ok){
+            alert(resultado.message);
+            listaProductos.innerHTML = "";
+        } else {
+            alert("Error: " + resultado.message);
         }
-
-
-
+    
     } catch (error) {
-        console.log(error); 
+        console.error("Error en la solicitud DELETE: ", error)
+        alert("Ocurrio un error al eliminar un producto")
     }
-        
-    });
+    
+}
+
+function mostrarError(error){
+    let htmlError = `
+    <li class="mensaje-error">
+        <p>
+            <strong>Error:</strong>
+            <span>${error}</span>
+        </p>
+    </li>
+    `  
+    listaProductos.innerHTML = htmlError;
+}
