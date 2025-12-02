@@ -315,6 +315,22 @@ input[type=number] {
     margin-bottom: 20px;
 }
 
+#eliminar-boton{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 10px;
+    grid-column: span 2; 
+    border: none;
+    background-color: var(--violetaOscuro);
+    color: var(--blanco);
+    width: auto;
+    padding: 10px;
+    font-size: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
 /*Modificar*/
 
 .boton-crear {  
