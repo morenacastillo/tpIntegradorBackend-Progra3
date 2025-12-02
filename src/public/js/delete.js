@@ -27,7 +27,7 @@ getProduct_form.addEventListener("submit", async (event) => {
                 <p>Id: ${producto.id} | Nombre: ${producto.titulo} | Precio: $${producto.precio}</p>
             </li>
             <li>
-                <input type="button" id="eliminar_boton" value="Eliminar producto"
+                <input class="full-row form-boton" type="submit" value="Eliminar producto"
             </li>
         </ul>
         `;
