@@ -12,7 +12,6 @@ router.get("/:id", validateId, getProductById);
 
 router.post("/", createProduct);
 
-
 // Update productos =========================================
 
 router.put("/", updateProduct);

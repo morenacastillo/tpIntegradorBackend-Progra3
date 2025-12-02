@@ -69,7 +69,6 @@ export const createProduct = async (req, res) => {
             productId: resultado.insertId
         })
         
-
     } catch(error) {
         console.error("Error interno del servidor");
 
@@ -99,7 +98,6 @@ export const updateProduct = async (req, res) => {
         let [resultado] = await ProductsModels.updateProduct(titulo, tipo, genero, autor, precio, imagen,
             activo, id);
 
-
         if(resultado.affectedRows === 0) { // No se actualizo nada
             return res.status(400).json({
                 message: "No se actualizo el producto"
@@ -109,7 +107,6 @@ export const updateProduct = async (req, res) => {
         res.status(201).json({
             message: `Producto con ID ${id} actualizado correctamente`,
         })
-        
         
     } catch(error) {
         console.error("Error al actualizar productos", error);

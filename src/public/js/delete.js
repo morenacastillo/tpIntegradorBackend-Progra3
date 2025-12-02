@@ -2,7 +2,6 @@ let url = "http://localhost:3000/api/products";
 let getProduct_form = document.getElementById("getProduct-form");
 let listaProductos = document.getElementById("lista-productos");
 
-
 getProduct_form.addEventListener("submit", async (event) => {
     event.preventDefault();
     
