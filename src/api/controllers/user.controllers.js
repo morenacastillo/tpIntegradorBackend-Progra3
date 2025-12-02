@@ -1,3 +1,4 @@
+import bcrypt from "bcrypt";
 import UserModels from "../models/user.models.js";
 
 export const insertUser = async (req, res) => {
@@ -11,7 +12,11 @@ export const insertUser = async (req, res) => {
             });
         }
 
-        const [rows] = await UserModels.insertUser(name, email, password);
+        const saltRounds = 10;
+        const hashedPassword = await bcrypt.hash(password, saltRounds);
+        
+        const [rows] = await UserModels.insertUser(name, email, hashedPassword);
+
 
         res.status(201).json({
             message: "Usuario creado con exito",
@@ -27,3 +32,4 @@ export const insertUser = async (req, res) => {
         })
     }
 }
+

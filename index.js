@@ -5,7 +5,7 @@ import environments from "./src/api/config/environments.js";
 import cors from "cors";
 
 import { loggerUrl } from "./src/api/middlewares/middlewares.js";
-import { productRoutes, viewRoutes } from "./src/api/routes/index.js";
+import { productRoutes, viewRoutes, userRoutes } from "./src/api/routes/index.js";
 import { join, __dirname } from "./src/api/utils/index.js"
 import connection from "./src/api/database/db.js";
 import session from "express-session";
@@ -47,19 +47,22 @@ app.use("/", viewRoutes);
 
 app.use("/api/products", productRoutes);
 
+app.use("/api/users", userRoutes);
+
 
 app.get("/login", async(req, res) => {
     res.render("login")
 })
 
 //MODULARIZAR ------------------------------------------------------------
-app.post("/login", async (req, res) =>{
+app.post("/login", async (req, res) => {
     try {
-        const { email, password } = req.body;
+        const { email, password } = req.body; 
 
-        if(!email ||!password){
-            return res.render("login",{
-                error: "Todos los campos son necesarios"
+        if(!email || !password) {
+            return res.render("login", {
+                title: "login",
+                error: "Todos los campos son necesarios!"
             });
         }
 
@@ -68,42 +71,41 @@ app.post("/login", async (req, res) =>{
 
         if(rows.length === 0) {
             return res.render("login", {
-                error: "Error: Email o Password invalidos"
-            })
+                error: "Error! Email o password no validos"
+            });
         }
-        console.log(rows);
 
-        const user = rows[0];
-        
-        const match = password === user.password;
+        console.log("ROWS: ", rows); 
+        const user = rows[0]; 
+        console.table(user);
 
-       // const match = await bcrypt.compare(password, user.password);
+        const match = await bcrypt.compare(password, user.password); 
 
-        console.log(match);
+        console.log("MATCH: ", match);
 
         if(match) {            
             req.session.user = {
                 id: user.id,
+                name: user.name,
                 email: user.email
             }
-        
-            res.redirect("/verAdmin")
+                res.redirect("/verAdmin");
 
         } else {
             return res.render("login", {
-                title: "Login",
-                error: "Epa! Contraseña incorrecta"
+                error: "Contraseña incorrecta"
             });
         }
+
 
     } catch (error) {
         console.log("Error en el login: ", error);
 
         res.status(500).json({
-            error: "Error interno en el servidor"
-        })
+            error: "Error interno del servidor"
+        });
     }
-})
+});
 
 app.post("/logout", (req, res) =>{
     req.session.destroy((err) => {
