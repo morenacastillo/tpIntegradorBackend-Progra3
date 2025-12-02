@@ -120,7 +120,47 @@ app.post("/logout", (req, res) =>{
     })
 })
 
+app.post("/api/sales", async (req, res) => {
+    try {
+        const { nombreUsuario, precioTotal, fechaEmision, productos } = req.body;
 
+        // Validacion de datos
+
+        if(!nombreUsuario || !precioTotal || !fechaEmision || !Array.isArray(productos) || productos.length === 0) {
+            return res.status(400).json({
+                message: "Datos invalidos, debes enviar nombreUsuario, precioTotal, fechaEmision y productos"
+            });
+        }
+
+        // Insertar la venta en "tickets"
+
+        const sqlTicket = "INSERT INTO tickets (nombreUsuario, precioTotal, fechaEmision) VALUES (?, ?, ?)"
+        const [ resultadoTicket ] = await connection.query(sqlTicket, [nombreUsuario, precioTotal, fechaEmision]);
+
+        // Obtener ID de la venta recien creada
+        const ticketId = resultadoTicket.insertId;
+
+        // Insertar cada producto en producto_tickets
+        const sqlProductoTickets = "INSERT INTO productos_tickets (idProducto, idTicket) VALUES (?, ?)"
+
+        // Al ser una relacion N a N, se debe insertar una fila por cada producto vendido
+        for (const idProducto of productos) {
+            await connection.query(sqlProductoTickets, [idProducto, ticketId]);
+        }
+
+        // Respuesta de exito 
+
+        res.status(200).json({
+            message: "Venta registrada con exito!!",
+            ticketId: ticketId
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ 
+            message: "Error interno del servidor"
+        })
+    }
+})
 
 app.listen(PORT, () => {
     console.log(`Servidor corriendo en el puerto ${PORT}`);
