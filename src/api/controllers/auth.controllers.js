@@ -1,6 +1,6 @@
 import connection from "../database/db.js";
 import bcrypt from "bcrypt";
-
+//validacion de el ingreso al usuario -> login
 export const loginUser = async (req, res) => {
     try {
         const { email, password } = req.body;

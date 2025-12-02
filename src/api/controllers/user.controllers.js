@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt";
 import UserModels from "../models/user.models.js";
-
+//validacion de crear usuario
 export const insertUser = async (req, res) => {
     try {
 
