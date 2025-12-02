@@ -12,22 +12,22 @@
     <h1 class="h1-centrar">Login</h1>
     <br>
 
-<form action="/login" method="POST" id="login-form">
-    <div class="div-login">
-        <div class="email-pass">
-            <label for="emailUser">Email</label>
-            <input type="email" placeholder="Ingresá tu email" name="email" id="emailUser" required>
+    <form action="/login" method="POST" id="login-form">
+        <div class="div-login">
+            <div class="email-pass">
+                <label for="emailUser">Email</label>
+                <input type="email" placeholder="Ingresá tu email" name="email" id="emailUser" required>
 
-            <label for="passwordUser">Password</label>
-            <input type="password" placeholder="Ingresá tu contraseña" name="password" id="passwordUser" required>
-        </div>
+                <label for="passwordUser">Password</label>
+                <input type="password" placeholder="Ingresá tu contraseña" name="password" id="passwordUser" required>
+            </div>
 
-        <div class="login-rapido">
-            <input type="submit" value="Login">
-            <input type="button" id="acceso-rapido" value="Acceso rapido">
+            <div class="login-rapido">
+                <input type="submit" value="Login">
+                <input type="button" id="acceso-rapido" value="Acceso rapido">
+            </div>
         </div>
-    </div>
-</form>
+    </form>
 
 </main>
 
@@ -44,4 +44,3 @@
 </script>
 
 
-<%- include("partials/footerLogin.ejs") %>

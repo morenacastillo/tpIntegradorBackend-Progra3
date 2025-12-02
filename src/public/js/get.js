@@ -1,7 +1,6 @@
 let url = "http://localhost:3000/api/products";
 let tbody = document.getElementById("tabla-productos-body");
 
-// Cuando cargue la página, traer todos los productos
 window.addEventListener("DOMContentLoaded", cargarProductos);
 
 async function cargarProductos() {
@@ -21,7 +20,7 @@ async function cargarProductos() {
 }
 
 function mostrarProductos(productos) {
-    tbody.innerHTML = ""; // limpiar tabla
+    tbody.innerHTML = "";
 
     productos.forEach(prod => {
         let fila = `
