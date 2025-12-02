@@ -2,7 +2,7 @@ import { Router } from "express";
 import { vistaProductos } from "../controllers/view.controllers.js"
 import { requireLogin } from "../middlewares/middlewares.js";
 const router = Router();
-
+//VISTAS EJS
 
 
 router.get("/verAdmin", requireLogin, vistaProductos);

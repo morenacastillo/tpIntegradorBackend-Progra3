@@ -20,7 +20,6 @@ export const crearVenta = async (req, res) => {
         const ticketId = resultadoTicket.insertId;
 
         const sqlProductoTickets = "INSERT INTO productos_tickets (idProducto, idTicket) VALUES (?, ?)";
-
         for (const idProducto of productos) {
             await connection.query(sqlProductoTickets, [idProducto, ticketId]);
         }

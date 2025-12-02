@@ -4,21 +4,25 @@ let altaUsers_container = document.getElementById("altaUsers-container");
 let url = "http://localhost:3000";
 
 crearProductos.addEventListener("submit", async (event) => {
-    event.preventDefault();
+    event.preventDefault(); //Evita que la página se recargue (por defecto HTML refresca la página al enviar un form).
     
-    let formData = new FormData(event.target);
+    let formData = new FormData(event.target); // Agarra todos los campos del formulario (según su name="") y los convierte en pares clave-valor:
 
-    let data = Object.fromEntries(formData.entries());
-    
+    let data = Object.fromEntries(formData.entries()); // Convierte eso en un objeto JavaScript:
+
     console.log(data);
     
     try {
         let respuesta = await fetch(`${url}/api/products`, { 
-        method: "POST",
-        headers: {
+        method: "POST", //significa que va a crear algo nuevo en el backend.
+        headers: { // decís que le estás enviando JSON.
             "Content-Type": "application/json"
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify(data) //enviás el objeto convertido a texto JSON.
+        //Tu backend lo recibe gracias a: app.use(express.json());
+
+        //el controlador lo recibe  let { titulo, tipo, genero, autor, precio, imagen } = req.body;
+
     }); 
 
     let resultado = await respuesta.json();

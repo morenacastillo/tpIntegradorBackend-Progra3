@@ -1,3 +1,7 @@
+/*Middlewares:
+Son filtros entre la peticion request y el controlador response: validateId, requireLogin y loggerUrl. Una vez todo esta ok, llama a next() y sigue la cadena
+*/
+
 const loggerUrl = (req, res, next) => {
     next();
 }

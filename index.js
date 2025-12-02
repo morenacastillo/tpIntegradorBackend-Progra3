@@ -1,7 +1,5 @@
 import express from "express";
-
 import environments from "./src/api/config/environments.js";
-
 import cors from "cors";
 
 import { loggerUrl } from "./src/api/middlewares/middlewares.js";
@@ -39,6 +37,7 @@ app.set("views", join(__dirname, "src/views")); // Indicamos la ruta de las vist
 
 /*
 ---------- Rutas ---------------
+request del usuario → index.js:app.use() → router → middleware(s) → controller → model → response al usuario
 */ 
 
 app.use("/", authRoutes);

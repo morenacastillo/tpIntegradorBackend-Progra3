@@ -1,5 +1,10 @@
 import ProductsModels from "../models/product.models.js"
 
+/*
+Controller:
+El controller recibe el id validado previamente y hace la consulta a ProductsModels (models -> contiene las sentencias sql para consultar a la BD) con selectProductWhereId (ejemplo), si el id coincide con uno existente en la BD arma el json y lo devuelve en la response al usuario
+*/
+
 export const getAllProducts = async (req, res) => {
     
     try {
@@ -89,12 +94,6 @@ export const updateProduct = async (req, res) => {
                 message: "Faltan campso requeridos"
             });
         }
-
-        let sql = `
-            UPDATE productos
-            SET titulo = ?, tipo = ?, genero = ?, autor = ?, precio = ?, imagen = ?, activo = ?
-            WHERE id = ?
-            `;
 
         let [resultado] = await ProductsModels.updateProduct(titulo, tipo, genero, autor, precio, imagen,
             activo, id);
