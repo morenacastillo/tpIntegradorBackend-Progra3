@@ -17,7 +17,6 @@ export const insertUser = async (req, res) => {
         
         const [rows] = await UserModels.insertUser(name, email, hashedPassword);
 
-
         res.status(201).json({
             message: "Usuario creado con exito",
             userId: rows.insertId

@@ -33,7 +33,6 @@ getProduct_form.addEventListener("submit", async (event) => {
     
 })
 
-
 function mostrarProducto(producto) {
     let htmlProducto = `
         <ul class="ul-admin">
